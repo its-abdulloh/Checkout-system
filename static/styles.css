@@ -1,0 +1,21 @@
+body{
+    background-color: aliceblue;
+    color: black;
+    font-size: large;
+}
+
+header{
+    padding: 20px;
+}
+
+header a{
+    font-size: x-large;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.home{
+    font-weight: 600;
+}
