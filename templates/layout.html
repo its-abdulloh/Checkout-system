@@ -20,14 +20,16 @@
 <body>
     
     <header class="py-3 border-bottom flex">
-        <a class="home" href="{{url_for('index')}}">Magazin</a></li>
-        <a href="{{url_for('checkout')}}">Kassa</a>
-        <a href="{{url_for('products')}}">Mahsulotlar</a>
+        <a class="home" href="/">Magazin</a>
+        <a href="/checkout">Kassa</a>
+        <a href="/products">Mahsulotlar</a>
     </header>
 
 
     <main class="container py-5 text-center">
         {% block main %}{% endblock %}
     </main>
+
+    <script src="/static/app.js"></script>
 </body>
 </html>

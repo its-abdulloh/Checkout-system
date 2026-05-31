@@ -19,3 +19,33 @@ header a{
 .home{
     font-weight: 600;
 }
+
+.menu{
+    background-color: #d2dbdd;
+    width: 960px;
+    margin: auto;
+    padding: 50px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.menu div{
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    height: 400px;
+    width: 400px;
+}
+
+.menu div:hover{
+    background-color: #ffffff;
+}
+
+a{
+    text-decoration: none;
+}

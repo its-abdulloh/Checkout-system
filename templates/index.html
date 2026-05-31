@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block main %}
+<div class="menu">
+    <div class="checkout" onclick="location.href='/checkout'">
+        <a href="/checkout">Kassa</a>
+    </div>
+
+    <div class="products" onclick="location.href='/products'">
+        <a href="/products">Mahsulotlar</a>
+    </div>
+
+    <div class="add" onclick="location.href='/add'">
+        <a href="/add">Qo'shish</a>
+    </div>
+
+    <div class="edit" onclick="location.href='/edit'">
+        <a href="edit">O'zgartirish</a>
+    </div>
+    <!-- 
+    <div class="stock">
+        <a href="/stock">Sklad</a>
+    </div>
+     -->
+</div>
+{% endblock %}
