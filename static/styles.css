@@ -1,3 +1,5 @@
+/* layout */
+
 body{
     background-color: aliceblue;
     color: black;
@@ -20,6 +22,8 @@ header a{
     font-weight: 600;
 }
 
+
+/* index */
 .menu{
     background-color: #d2dbdd;
     width: 960px;
@@ -48,4 +52,46 @@ header a{
 
 a{
     text-decoration: none;
+}
+
+
+/* add html */
+.product-info{
+    background-color: #d2dbdd;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.product-info input{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.product-info label{
+    font-weight: 600;
+}
+
+.success-text{
+    height: 300px;
+    width: 600px;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    background-color: #a9dda9;
+    border-radius: 12px;
+}
+
+.fail-text{
+    height: 300px;
+    width: 600px;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    background-color: #e04e4e;
+    border-radius: 12px;
 }

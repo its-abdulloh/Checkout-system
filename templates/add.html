@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Qo'shish
+{% endblock %}
+
+{% block main %}
+    {% if success %}
+        <div class="success-text">Qo'shildi!</div>
+    {% endif %}
+
+    {% if failed %}
+        <div class="fail-text">Qo'shilmadi, bunaqa mahsulot bor!</div>
+    {% endif %}
+
+    <div class="product-info">
+        <form action="/add" method="post">
+            <label for="barcode">Barcode</label>
+            <input type="text" id="barcode" name="barcode" required>
+            <label for="name">Mahsulot nomi</label>
+            <input type="text" id="name" name="name" required>
+            <label for="price">Narxi</label>
+            <input type="number" id="price" name="price" required>
+            <label for="stock">Nechta</label>
+            <input type="number" id="stock" name="stock" required>
+
+            <button class="btn btn-success" type="submit">Tayyor</button>
+        </form>
+    </div>
+
+{% endblock %}
