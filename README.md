@@ -52,7 +52,6 @@ Complete sale
 Save sale record.
 Save all items sold.
 Reduce stock for each product.
-Print receipt (optional).
 Clear cart.
 Ready for next customer.
 

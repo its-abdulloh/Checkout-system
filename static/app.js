@@ -1,3 +1,3 @@
-document.querySelector('input[name="barcode"]').addEventListener('blur', function() {
+document.querySelector('.barcode#barcode').addEventListener('blur', function() {
     this.focus();
 });

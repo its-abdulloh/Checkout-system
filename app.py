@@ -19,18 +19,16 @@ def add():
         barcode = request.form.get("barcode")
         name = request.form.get("name")
         price = request.form.get("price")
-        stock = request.form.get("stock")
 
         try:
             cursor.execute("""
-                INSERT INTO products (barcode,name,price,stock)
-                VALUES(?,?,?,?)
+                INSERT INTO products (barcode,name,price)
+                VALUES(?,?,?)
                 """,
                 (
                     barcode,
                     name,
                     price,
-                    stock
                 )
             )
             conn.commit()
@@ -62,7 +60,7 @@ def checkout():
 
     if request.method =="POST":
         barcode = request.form.get("barcode")
-        product = cursor.execute("SELECT id, name, price, stock FROM products WHERE barcode = ?",(barcode,)).fetchone()
+        product = cursor.execute("SELECT id, name, price FROM products WHERE barcode = ?",(barcode,)).fetchone()
 
         if product:
             cart = session["cart"]
@@ -70,12 +68,12 @@ def checkout():
             product_id = str(product["id"])
             if product_id in cart:
                 cart[product_id]["quantity"]+=1
+                session["cart"] = cart
                 return redirect("/checkout")
             else:
                 cart[product_id] = {
                     "name":product["name"],
                     "price":product["price"],
-                    "stock":product["stock"],
                     "quantity":1
                 }
                 session["cart"] = cart
@@ -86,13 +84,34 @@ def checkout():
     total = 0
     cart = session["cart"]
     if cart:
-        for product in session["cart"].values():
+        for product in cart.values():
             total += product["price"]*product["quantity"]
-
     conn.close()
 
     return render_template("checkout.html",cart = cart.values(),total=total)
 
 
-# @app.route("/sell",methods=["POST"])
-# def sell():
+@app.route("/sell",methods=["POST"])
+def sell():
+    conn = sqlite3.connect("store.db")
+    cursor = conn.cursor()
+
+    cart = session["cart"]
+
+    for product in cart.values():
+        product_name = product["name"]
+        price = product["price"]
+        quantity = product["quantity"]
+        total = price*quantity
+
+        cursor.execute("INSERT INTO sales(product_name,price,quantity,total) VALUES(?,?,?,?)",(product_name,price,quantity,total))
+    
+    conn.commit()
+    conn.close()
+
+    session["cart"] = {}
+
+    return redirect("/checkout")
+
+        
+

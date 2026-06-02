@@ -25,11 +25,15 @@
             <div class="total">
                 Hammasi : {{total}}
             </div>
+
+            <form action="/sell" method="post">
+                <button class="btn btn-success m-3" type="submit">Sotish</button>
+            </form>
         </div>
 
         <div class="barcode">
             <form action="/checkout" method="post">
-                <input type="text" name="barcode" placeholder="barcode" autofocus>
+                <input type="text" name="barcode" id="barcode" placeholder="barcode" autofocus>
                 <button class="btn btn-success m-3" type="submit">Qo'shish</button>
             </form>
         </div>
