@@ -137,8 +137,9 @@ a{
     justify-content: space-between;
 }
 
-/* sales */
-.sales{
+/* sales,products */
+.sales-container,
+.products-container{
     background-color:#d2dbdd;
     height: auto;
     width: 70%;
@@ -147,7 +148,8 @@ a{
     padding: 10px;
 }
 
-.sales-header {
+.sales-header,
+.product-header{
     display: flex;
     justify-content: space-between;
     font-weight: bold;
@@ -155,15 +157,32 @@ a{
     border-bottom: 2px solid #999;
 }
 
-.sale-item {
+.sale-item,
+.product-item{
     display: flex;
     justify-content: space-between;
     padding: 12px 0;
     border-bottom: 1px solid #bbb;
 }
 
-.sale-item span,
-.sales-header span{
+.sales-container span,
+.products-container span{
     width: 20%;
     text-align: center;
+}
+
+/* search*/
+
+.search-form {
+    width: 70%;
+    margin: 20px auto;
+    display: flex;
+    gap: 10px;
+}
+
+.search-form input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #aaa;
 }

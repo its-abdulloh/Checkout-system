@@ -79,7 +79,7 @@ def checkout():
                 session["cart"] = cart
                 return redirect("/checkout")
         else:
-            return render_template("checkout.html",error = "Mahsulot topilmadi!")
+            return render_template("checkout.html",error = "Mahsulot topilmadi!",cart = session["cart"].values())
 
     total = 0
     cart = session["cart"]
@@ -120,8 +120,28 @@ def sales():
     cursor = conn.cursor()
     
 
-    sales = cursor.execute("SELECT product_name, price, quantity, total, sale_date FROM sales").fetchall()
+    sales = cursor.execute("SELECT product_name, price, quantity, total, datetime(sale_date, 'localtime') as sale_date FROM sales ORDER BY sale_date DESC").fetchall()
+
+    conn.close()
 
     return render_template("sales.html",sales = sales)
+
+@app.route("/products")
+def products():
+    conn = sqlite3.connect("store.db")
+    conn.row_factory = sqlite3.Row 
+    cursor = conn.cursor()
+
+    query = request.args.get("q")
+
+    if query:
+        products = cursor.execute("SELECT barcode,name,price FROM products WHERE name LIKE ? ORDER BY name ASC",("%"+query+"%",)).fetchall()
+    else:
+        products = cursor.execute("SELECT barcode,name,price FROM products ORDER BY name ASC").fetchall()
+
+    conn.close()
+
+    return render_template("products.html",products = products)
+
     
 
