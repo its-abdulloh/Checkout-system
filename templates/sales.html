@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Sotuvlar
+{% endblock %}
+
+{% block main %}
+
+<div class="sales">
+
+    <div class="sales-header">
+        <span>Product</span>
+        <span>Price</span>
+        <span>Quantity</span>
+        <span>Total</span>
+        <span>Date</span>
+    </div>
+    {% for sale in sales %}
+    <div class="sale-item">
+        <span>{{sale.product_name}}</span>
+        <span>{{sale.price}}</span>    
+        <span>{{sale.quantity}}</span>
+        <span>{{sale.total}}</span>
+        <span>{{sale.sale_date}}</span>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

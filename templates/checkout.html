@@ -37,5 +37,11 @@
                 <button class="btn btn-success m-3" type="submit">Qo'shish</button>
             </form>
         </div>
+
+        <script>
+            document.querySelector('.barcode#barcode').addEventListener('blur', function() {
+                this.focus();
+            });
+        </script>
     </div>
 {% endblock %}

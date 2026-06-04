@@ -136,3 +136,34 @@ a{
     display: flex;
     justify-content: space-between;
 }
+
+/* sales */
+.sales{
+    background-color:#d2dbdd;
+    height: auto;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.sales-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    padding: 10px 0;
+    border-bottom: 2px solid #999;
+}
+
+.sale-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #bbb;
+}
+
+.sale-item span,
+.sales-header span{
+    width: 20%;
+    text-align: center;
+}

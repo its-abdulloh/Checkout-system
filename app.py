@@ -113,5 +113,15 @@ def sell():
 
     return redirect("/checkout")
 
-        
+@app.route("/sales")
+def sales():
+    conn = sqlite3.connect("store.db")
+    conn.row_factory = sqlite3.Row 
+    cursor = conn.cursor()
+    
+
+    sales = cursor.execute("SELECT product_name, price, quantity, total, sale_date FROM sales").fetchall()
+
+    return render_template("sales.html",sales = sales)
+    
 
