@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Mahsulotlar
+{% endblock %}
+
+{% block main %}
+
+<div class="products-container">
+
+    <div class="product-header">
+        <span>Barcode</span>
+        <span>Nomi</span>
+        <span>Narxi</span>
+    </div>
+    {% for product in products %}
+    <div class="product-item">
+        <span>{{product.barcode}}</span>
+        <span>{{product.name}}</span>
+        <span>{{product.price}}</span>    
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
