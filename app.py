@@ -79,7 +79,7 @@ def checkout():
                 session["cart"] = cart
                 return redirect("/checkout")
         else:
-            return render_template("checkout.html",error = "Mahsulot topilmadi!",cart = session["cart"].values())
+            return render_template("checkout.html",error = "Mahsulot topilmadi!",cart = session["cart"])
 
     total = 0
     cart = session["cart"]
@@ -88,8 +88,30 @@ def checkout():
             total += product["price"]*product["quantity"]
     conn.close()
 
-    return render_template("checkout.html",cart = cart.values(),total=total)
+    return render_template("checkout.html",cart = cart,total=total)
 
+@app.route("/clear",methods=["POST"])
+def clear():
+    session["cart"] = {}
+    return render_template("/checkout.html")
+
+@app.route("/update_quantity",methods=["POST"])
+def update_quantity():
+    product_id = request.form.get("product_id")
+    action = request.form.get("action")
+
+    cart = session["cart"]
+
+    if action=="increase":
+        cart[product_id]["quantity"]+=1
+    elif action=="decrease":
+        cart[product_id]["quantity"]-=1
+
+        if cart[product_id]["quantity"]==0:
+            del cart[product_id]
+
+    session["cart"] = cart
+    return redirect("/checkout")
 
 @app.route("/sell",methods=["POST"])
 def sell():

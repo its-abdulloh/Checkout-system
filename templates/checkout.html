@@ -14,13 +14,31 @@
         <div class="cart">
             <h2>KARZINA</h2>
             {% if cart %}
-                {% for product in cart %}
+                {% for product_id, product in cart.items() %}
                 <div class="item">
                     <p class="name">{{product.name}}</p>
                     <p class="price">{{product.price}}</p>
-                    <p class="amount">{{product.quantity}}</p>
+                    
+                    <div class="quantity-controls">
+                        <form action="/update_quantity" method="post" style="display:inline;">
+                            <input type="hidden" name="product_id" value="{{product_id}}">
+                            <input type="hidden" name="action" value="decrease">
+                            <button type="submit">-</button>
+                        </form>
+
+                        <p class="amount">{{product.quantity}}</p>
+
+                        <form action="/update_quantity" method="post" style="display:inline;">
+                            <input type="hidden" name="product_id" value="{{product_id}}">
+                            <input type="hidden" name="action" value="increase">
+                            <button type="submit">+</button>
+                        </form>
+                    </div>
                 </div>
                 {% endfor %}
+                <form action="/clear" method="post">
+                    <button class="btn btn-danger">Tozalash</button>
+                </form>
             {% endif %}
             <div class="total">
                 Hammasi : {{total}}

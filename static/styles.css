@@ -137,6 +137,14 @@ a{
     justify-content: space-between;
 }
 
+.quantity-controls{
+    display: flex;
+    justify-content: space-around;
+    gap: 5px;
+}
+
+
+
 /* sales,products */
 .sales-container,
 .products-container{
