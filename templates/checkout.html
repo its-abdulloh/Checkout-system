@@ -26,21 +26,23 @@
                 Hammasi : {{total}}
             </div>
 
-            <form action="/sell" method="post">
+            <form class="sell-form" action="/sell" method="post">
                 <button class="btn btn-success m-3" type="submit">Sotish</button>
             </form>
         </div>
 
         <div class="barcode">
             <form action="/checkout" method="post">
-                <input type="text" name="barcode" id="barcode" placeholder="barcode" autofocus>
+                <input class="add" type="text" name="barcode" id="barcode" placeholder="barcode" autofocus>
                 <button class="btn btn-success m-3" type="submit">Qo'shish</button>
             </form>
         </div>
 
         <script>
-            document.querySelector('.barcode#barcode').addEventListener('blur', function() {
-                this.focus();
+            document.querySelector(".add").addEventListener("input", function(){
+                if (this.value.length == 13){
+                    this.closest("form").submit();
+                }
             });
         </script>
     </div>

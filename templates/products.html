@@ -6,8 +6,12 @@ Mahsulotlar
 
 {% block main %}
 
-<div class="products-container">
+<form method="GET" action="/products" class="search-form">
+    <input type="text" name="q" placeholder="Mahsulot nomi..." value="{{request.args.get('q','')}}">
+    <button class="btn btn-primary" type="submit">Qidirish</button>
+</form>
 
+<div class="products-container">
     <div class="product-header">
         <span>Barcode</span>
         <span>Nomi</span>
