@@ -26,7 +26,7 @@ Mahsulotlar
             <button class="btn btn-primary" type="button">O'zgartirish</button>
         </a>
         <form action="/delete/{{product.barcode}}" method="post">
-            <button type="submit">O'chirish</button>
+            <button type="submit" onclick="return confirm('Haqiqatan o`chirmoqchimisiz?')">O'chirish</button>
         </form>
     </div>
     {% endfor %}

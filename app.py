@@ -93,7 +93,7 @@ def checkout():
 @app.route("/clear",methods=["POST"])
 def clear():
     session["cart"] = {}
-    return render_template("/checkout.html")
+    return redirect("/checkout")
 
 @app.route("/update_quantity",methods=["POST"])
 def update_quantity():
@@ -182,14 +182,10 @@ def edit(barcode):
         conn.close()
 
         return render_template("edit.html",product=product)
+    
     else:
         name = request.form.get("name")
         price = request.form.get("price")
-
-        try:
-            price=float(price)
-        except ValueError:
-            return render_template(url_for("edit",barcode = barcode),error="Narx noto'gri")
 
         cursor.execute("UPDATE products SET name=?,price=? where barcode=?",(name,price,barcode))
 
@@ -200,6 +196,24 @@ def edit(barcode):
 
 @app.route("/delete/<barcode>", methods=["POST"])
 def delete(barcode):
+    conn = sqlite3.connect("store.db")
+    cursor = conn.cursor()
     
+    product = cursor.execute(
+        "SELECT barcode FROM products WHERE barcode=?",
+        (barcode,)
+    ).fetchone()
+
+    if not product:
+        conn.close()
+        return redirect("/products")
+
+    cursor.execute("DELETE FROM products WHERE barcode=?",(barcode,))
+
+    conn.commit()
+    conn.close()
+    
+    return redirect("/products")
+
 
 
