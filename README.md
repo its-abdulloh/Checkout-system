@@ -70,8 +70,4 @@ Search product.
 Change details.
 Save.
 
-Restock
 
-Select product.
-Add quantity.
-Save.

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, url_for
 import sqlite3
 
 
@@ -166,4 +166,40 @@ def products():
     return render_template("products.html",products = products)
 
     
+@app.route("/edit/<barcode>", methods=["GET","POST"])
+def edit(barcode):
+    conn = sqlite3.connect("store.db")
+    conn.row_factory = sqlite3.Row 
+    cursor = conn.cursor()
+
+    if request.method == "GET":
+        product = cursor.execute("SELECT name,price FROM products WHERE barcode=?",(barcode,)).fetchone()
+
+        if not product:
+            conn.close()
+            return redirect("/products")
+
+        conn.close()
+
+        return render_template("edit.html",product=product)
+    else:
+        name = request.form.get("name")
+        price = request.form.get("price")
+
+        try:
+            price=float(price)
+        except ValueError:
+            return render_template(url_for("edit",barcode = barcode),error="Narx noto'gri")
+
+        cursor.execute("UPDATE products SET name=?,price=? where barcode=?",(name,price,barcode))
+
+        conn.commit()
+        conn.close()
+
+        return redirect("/products")
+
+@app.route("/delete/<barcode>", methods=["POST"])
+def delete(barcode):
+    
+
 
