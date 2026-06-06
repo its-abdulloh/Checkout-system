@@ -1,9 +1,40 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 import sqlite3
+import os
+import webbrowser
+import threading
 
+def open_browser():
+    webbrowser.open("http://127.0.0.1:5000/")
+
+if not os.path.exists("store.db"):
+    conn = sqlite3.connect("store.db")
+    cursor = conn.cursor()
+    cursor.execute("""
+    CREATE TABLE products (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        barcode TEXT UNIQUE NOT NULL,
+        name TEXT NOT NULL,
+        price REAL NOT NULL
+    )
+    """)
+    cursor.execute("""
+    CREATE TABLE sales(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        product_name TEXT NOT NULL,
+        price REAL NOT NULL,
+        quantity INTEGER NOT NULL,
+        total REAL NOT NULL,
+        sale_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    """       
+    )
+    conn.commit()
+    conn.close()
 
 app = Flask(__name__)
 app.secret_key = "fabdk_07"
+
 
 @app.route("/")
 def index():
@@ -216,4 +247,6 @@ def delete(barcode):
     return redirect("/products")
 
 
-
+if __name__ == "__main__":
+    threading.Timer(1.5, open_browser).start()
+    app.run()
