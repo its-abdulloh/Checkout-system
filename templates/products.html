@@ -21,7 +21,10 @@ Mahsulotlar
     <div class="product-item">
         <span>{{product.barcode}}</span>
         <span>{{product.name}}</span>
-        <span>{{product.price}}</span>    
+        <span>{{product.price}}</span> 
+        <a href="/edit/{{product.barcode}}">
+            <button class="btn btn-primary" type="button">O'zgartirish</button>
+        </a>
     </div>
     {% endfor %}
 </div>
