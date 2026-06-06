@@ -25,6 +25,9 @@ Mahsulotlar
         <a href="/edit/{{product.barcode}}">
             <button class="btn btn-primary" type="button">O'zgartirish</button>
         </a>
+        <form action="/delete/{{product.barcode}}" method="post">
+            <button type="submit">O'chirish</button>
+        </form>
     </div>
     {% endfor %}
 </div>
